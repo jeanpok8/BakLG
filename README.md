@@ -10,6 +10,7 @@ to achieve all that, the system may help in:Regulate  the home environment(light
 The project is mainly built on basis of OpenHAB which is a vandor and technology agnostic openhab source automation
 software for Home automation, and for quick Setup please visit this page:https://github.com/openhab/openhab/wiki/Quick-Setup-an-openHAB-Server.
 for this project rules are written out of openHAB using java application, for more information check the project Architecture.
+![screenshot from 2015-06-20 12 51 37](https://cloud.githubusercontent.com/assets/8640427/8266996/d934fc6e-174c-11e5-9857-352d4e25ce80.png)
 
 
 
