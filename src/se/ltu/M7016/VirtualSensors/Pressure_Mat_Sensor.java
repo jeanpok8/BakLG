@@ -9,10 +9,8 @@ public class PressureMatSensor {
 	/*
 	 * A Simple program to Push data in MySQL database to simulate Pressure mat sensor for bed Occupency
 	 */
-
-	public static void main(String[] args) {
-
-		String url = "jdbc:mysql://localhost:3306/";
+       public static void main(String[] args) {
+               String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "openhab";
 		String userName = "openhab";
 		String password = "openhab";
