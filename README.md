@@ -1,5 +1,5 @@
-# BakLG
-M7019E course's repository.
+# BakLG(M7019E course's repository.)
+
 This repository contains a Home automation project, with intension of helping elderly and /or disabled persons to remain
 home safe and comfortable rather  than move to a costly healthcare facility.The system make it possible for family members
 to monitor their loved ones from anywhere with internet connection using very simple alerts(Pushbullet). 
