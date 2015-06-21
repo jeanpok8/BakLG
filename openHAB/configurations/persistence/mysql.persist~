@@ -13,4 +13,5 @@ Items {
 	* : strategy = everyChange, restoreOnStartup, everySecond
 	undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
        Occurance: strategy = everyChange, restoreOnStartup, everySecond 
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
 }
