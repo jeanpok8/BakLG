@@ -5,7 +5,7 @@ import org.openhab.model.script.actions.*
 
 var Timer timer
 
-/*rule "NO Motion Detected"
+/*rule "NO Motion Detected"*/
 	when
 		Item Ms_Motion changed from OPEN to CLOSED
 	then
@@ -20,7 +20,7 @@ rule "Motion Detected"
 	   
 end
 
-/*Switch off the light and check the rule every 30 min
+/*Switch off the light and check the rule every 30 min*/
 
 rule "Switch off the light"
 when 
@@ -30,9 +30,9 @@ if(Ms_Lum.state>600)
 //sendCommand(Light_Switch, OFF) 
 //SendCommand(DimmedLight,"0")
 end
-*/
 
-/*combination of rule to swith the light at 40%  if the luminance is below 100 Lux
+
+/*combination of rule to swith the light at 40%  if the luminance is below 100 Lux*/
 
 
 
@@ -45,9 +45,9 @@ rule "Dimmed Light"
         if(percent<0)   percent = 0
 		if(percent>100) percent = 100
         postUpdate(DimmedLight, percent);
-end */
+end 
 
- /* Rule for heart pulse rate
+ /* Rule for heart pulse rate */
 
 rule"Blood pressure" 
 
@@ -58,8 +58,8 @@ rule"Blood pressure"
       if (WT_BloodPressure.state>1.7 ||WT_BloodPressure.state<1 )
      // sendNotification("jeanpok8@gmail.com", "Abnomal blood pressure rate")
     end
- */
- /*Rule for heart Beat rate
+
+ /*Rule for heart Beat rate*/
  
 rule"Heart Beat"
 
@@ -71,4 +71,3 @@ rule"Heart Beat"
      // sendNotification("jeanpok8@gmail.com", "Abnomal heart beat rate")
 end
 
-*/
