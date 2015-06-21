@@ -1,0 +1,22 @@
+/*My configuration */
+
+Group All
+Group Kitchen		"Kitchen"		<kitchen>	(All)
+Group Room			"Living Room"	<video>		(All)
+Group Multi_Sensor	"Multi Sensor"	<smiley>	(All)
+Group Power_Meter	"Power Meter"				(All)
+
+
+Contact	Ms_Motion	"Motion Sensor [%s]"	<frontdoor>		(Multi_Sensor)	{zwave="9:command=SENSOR_BINARY"}
+Number	Ms_Temp 	"Temperature [%.1f °C]"	<temperature>	(Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=1,sensor_scale=0,refresh_interval=10"}
+Number	Ms_Lum		"Lumination [%.0f Lux]"					(Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=3,refresh_interval=10"}
+Number	Ms_Hum		"Humidity [%.0f %%]"					(Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=5,refresh_interval=10"}
+Number	MS_bat		"Battery [%s %%]"		<cistern>		(Multi_Sensor)	{zwave="9:command=battery,refresh_interval=10"}
+
+
+Number	Meter_Power		"Power [%.1f W]"					(Power_Meter)	{zwave="8:command=meter,meter_scale=E_W"}
+Number	Meter_Energy	"Energy [%.2f kWh]"	<energy>		(Power_Meter)	{zwave="8:command=meter,meter_scale=E_KWh"}
+Switch	Meter_Switch	"Plug"				<switch>		(Power_Meter)	{zwave="8:command=switch_binary"}
+
+
+Switch	Light_Switch 	"Light"				<switch>						{zwave="5:command=switch_binary"}
