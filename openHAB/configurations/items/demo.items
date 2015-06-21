@@ -7,9 +7,9 @@ Group Multi_Sensor	"Multi Sensor"	<smiley>	(All)
 Group Power_Meter	"Power Meter"				(All)
 Group	Withings	"withings Bracelet"	(all)
 
-Contact	Ms_Motion	"Motion Sensor [%s]"	<frontdoor>		(Multi_Sensor)	{zwave="9:command=SENSOR_BINARY"}
+Contact	Ms_Motion	"Motion Sensor [%s]"	<frontdoor>	(Multi_Sensor)	{zwave="9:command=SENSOR_BINARY"}
 Number	Ms_Temp 	"Temperature [%.1f °C]"	<temperature>	(Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=1,sensor_scale=0"}
-Number	Ms_Lum		"Lumination [%.0f Lux]"					    (Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=3"}
+Number	Ms_Lum		"Lumination [%.0f Lux]"					  (Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=3"}
 Number	Ms_Hum		"Humidity [%.0f %%]"				     	(Multi_Sensor)	{zwave="9:command=SENSOR_MULTILEVEL,sensor_type=5"}
 Number	MS_bat		"Battery [%s %%]"		<cistern>	   	(Multi_Sensor)	{zwave="9:command=battery"}
 
