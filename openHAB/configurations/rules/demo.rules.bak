@@ -1,0 +1,74 @@
+import org.openhab.core.library.items.*
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+
+var Timer timer
+
+/*rule "NO Motion Detected"
+	when
+		Item Ms_Motion changed from OPEN to CLOSED
+	then
+		sendCommand(Light_Switch, OFF)
+	end
+
+rule "Motion Detected"
+	when
+		Item Ms_Motion changed from CLOSED to OPEN
+	then
+		//sendCommand(Light_Switch,ON)
+	   
+end
+
+/*Switch off the light and check the rule every 30 min*/
+
+rule "Switch off the light"
+when 
+ Time cron "0 0/1 * * * ?"
+then
+if(Ms_Lum.state>600)
+//sendCommand(Light_Switch, OFF) 
+//SendCommand(DimmedLight,"0")
+end
+
+
+/*combination of rule to swith the light at 40%  if the luminance is below 100 Lux*/
+
+
+
+rule "Dimmed Light"
+	when
+		Item DimmedLight received command
+	then
+		var Number percent = 0
+		if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType 
+        if(percent<0)   percent = 0
+		if(percent>100) percent = 100
+        postUpdate(DimmedLight, percent);
+end
+
+  /*Rule for heart pulse rate*/
+
+rule"Blood pressure" 
+
+    when 
+      Item WT_BloodPressure received update
+      
+      then 
+      if (WT_BloodPressure.state>1.7 ||WT_BloodPressure.state<1 )
+     // sendNotification("jeanpok8@gmail.com", "Abnomal blood pressure rate")
+    end
+ 
+ /*Rule for heart Beat rate*/
+ 
+rule"Heart Beat"
+
+   when 
+      Item WT_HBrate received update
+      
+      then 
+      if (WT_HBrate.state>100|| WT_HBrate.state<60)
+     // sendNotification("jeanpok8@gmail.com", "Abnomal heart beat rate")
+end
+
+*/
