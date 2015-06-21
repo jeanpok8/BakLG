@@ -17,7 +17,7 @@ public class PushbulletClient {
 	private HttpClient client;
 	private final String noteUrl="https://api.pushbullet.com/v2/pushes";
 	//put a token
-	private final String token = "Bearer hw2eOF8ddHT7JSiNmqIXw86hQIHuGWMa";
+	private final String token = "Bearer<>";
 	private StringBuilder note;
 	private StringEntity stringEntity;
 	
