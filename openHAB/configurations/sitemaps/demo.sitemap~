@@ -1,0 +1,40 @@
+sitemap demo label="Main Menu"
+{
+	Frame {
+		Text item=Ms_Motion
+		Text item=Ms_Temp
+		Text item=Ms_Lum
+		Text item=Ms_Hum
+		Text item=MS_bat
+	}
+	Frame {
+		Switch item=Light_Switch
+	}
+	Frame {
+		Switch item=Meter_Switch
+		Text item=Meter_Power
+		Text item=Meter_Energy
+	}
+	Frame {
+		Text item=WT_HBrate
+		Text item=WT_Weight 
+		Text item=WT_BloodPressure
+		 }
+	Frame {
+		Switch item=Occupancy
+	}	 
+		Frame {
+                Text item=Kitchen_Motion
+		Switch item=Kitchen_Light
+		Switch item=Cooker_Switch
+                Switch item=Kettle_Switch
+	} 
+     Frame {
+		
+                Text item=LivingRoom_Motion
+                Switch item=Tv_Switch
+                Switch item=LivingRoom_Light
+	} 
+
+}
+
