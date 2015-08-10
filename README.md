@@ -9,7 +9,7 @@ to achieve all that, the system may help in:Regulate  the home environment(light
  
 The project is mainly built on basis of OpenHAB which is a vandor and technology agnostic openhab source automation
 software for Home automation, and for quick Setup please visit this page:https://github.com/openhab/openhab/wiki/Quick-Setup-an-openHAB-Server.
-for this project data are persisted in Msql persistence, rules are written out of openHAB using java application and the communication(openhab-application)uses the RestApi,for more information check the project Architecture.
+for this project data are persisted in Msql persistence, rules are written out of openHAB using java application and the communication(openhab-application)uses the Rest Api,for more information check the project Architecture.
 
 PROJECT ARCHITECTURE
 
