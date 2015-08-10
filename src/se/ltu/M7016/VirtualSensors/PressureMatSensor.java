@@ -5,8 +5,7 @@ import java.sql.*;
 import java.util.Random;
 
 public class PressureMatSensor {
-
-	/*
+        /*
 	 * A Simple program to Push data in MySQL database to simulate Pressure mat sensor for bed Occupency
 	 */
        public static void main(String[] args) {
@@ -20,8 +19,7 @@ public class PressureMatSensor {
 
 		while (true) {
 
-			try {
-				/*
+			try {	/*
 				 * Connect to a database with different parameters used to
 				 * connect to the database.
 				 */
@@ -43,9 +41,7 @@ public class PressureMatSensor {
 					statement.clearBatch();
 				}
 
-				else {
-
-					java.sql.PreparedStatement statement = conn
+				else {java.sql.PreparedStatement statement = conn
 							.prepareStatement(sql);
 					statement.setString(2, PMS_Occupancy1);
 					statement.setTimestamp(1,
