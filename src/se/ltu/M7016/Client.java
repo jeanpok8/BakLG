@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.apache.http.client.ClientProtocolException;
 
-public class test {
+public class Client {
 
 	public static void main(String[] args) throws InterruptedException, ClientProtocolException, IOException {
 		while (true) {
