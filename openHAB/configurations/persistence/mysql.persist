@@ -13,4 +13,14 @@ Items {
 	* : strategy = everyChange, restoreOnStartup, everySecond
 	undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
        Occupancy: strategy = everyChange, restoreOnStartup, everySecond 
+       Kettle_Switch : strategy = everyChange, restoreOnStartup, everySecond
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
+       Tv_Switch: strategy = everyChange, restoreOnStartup, everySecond
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
+       Cooker_Switch: strategy = everyChange, restoreOnStartup, everySecond
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
+       Kitchen_Motion: strategy = everyChange, restoreOnStartup, everySecond
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
+       LivingRoom_Motion: strategy = everyChange, restoreOnStartup, everySecond
+       undefined : strategy = everySecond, everyChange, everyUpdate, restoreOnStartup
 }
