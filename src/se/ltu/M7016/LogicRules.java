@@ -1,3 +1,4 @@
+package testing;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,92 +22,137 @@ public class LogicRules {
 		OpenhabClient state_kettle = new OpenhabClient("localhost", 8080);
 		OpenhabClient state_morning = new OpenhabClient("localhost", 8080);
 		OpenhabClient state_presence = new OpenhabClient("localhost", 8080);
+		OpenhabClient state_Switch = new OpenhabClient("localhost", 8080);
+		
 		OpenhabClient state_LK = new OpenhabClient("localhost", 8080);
 		OpenhabClient state_LR = new OpenhabClient("localhost", 8080);
 		PushbulletClient RulePush = new PushbulletClient();
+		OpenhabClient pull= new OpenhabClient("localhost", 8080);
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "openhab";
 		String userName = "openhab";
 		String password = "openhab";
-		java.sql.Statement st = null;
-		java.sql.Statement st2 = null;
-		java.sql.Statement st3 = null;
-		java.sql.Statement st5 = null;
-		java.sql.Statement st6 = null;
-		java.sql.Statement st7 = null;
-		java.sql.Statement st9 = null;
-		java.sql.Statement st10 = null;
-
+		java.sql.Statement st= null;
+		java.sql.Statement st2=null;
+		java.sql.Statement st3=null;
+		java.sql.Statement st5=null;
+		java.sql.Statement st6=null;
+		java.sql.Statement st7=null;
+		java.sql.Statement st9=null;
+		java.sql.Statement st10=null;
+		java.sql.Statement st11=null;
+		java.sql.Statement st12=null;
+		java.sql.Statement st13=null;
+		
+		
+	      
 		Connection conn = DriverManager.getConnection(url + dbName, userName,
 				password);
 		st = conn.createStatement();
-
-		/* Rule for heart Beat rate */
-
-		ResultSet res = st
-				.executeQuery("SELECT * From Item7 ORDER BY Time DESC LIMIT 1");
-
-		while (res.next()) {
-			int Value = res.getInt("Value");
-			if (Value >= 100||Value <= 60) {
+		
+		/*
+		 * Switch the light ON in the morning after checking LUX and the
+		 * occupancy at a given time.
+		 */
+    
+		st3 = conn.createStatement();
+		ResultSet res3 = st3
+				.executeQuery("SELECT * From Item15 ORDER BY Time DESC LIMIT 1");
+		while (res3.next()) {
+			String Value = res3.getString("Value");
+			if (Value.equals("ON")) {
 				try {
-					RulePush.sendNote("Heart Beat rate",
-							"Abnomal heart beat rate");
+					
+					st5 = conn.createStatement();
+					ResultSet res5 = st5
+							.executeQuery("SELECT * From Item18 ORDER BY Time DESC LIMIT 1");
+					while (res5.next()) {
+						int Value1 = res5.getInt("Value");
+						if (Value1 <= 200) {
+							 state_morning.pushItemValue("Meter_Switch", "ON");
+							 state_kettle.pushItemValue("Kettle_Switch", "ON");
+							}
+					}
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+
+			} else if (Value.equals("OFF")) {
+               {
+				try {
+                    state_Switch.pushItemValue("Meter_Switch","OFF");
+					 state_kettle.pushItemValue("Kettle_Switch", "OFF");
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+                       }}}
+                    
+		
+		
 
-			}
+		/* Rule for blood pressure compare to 120/80mmHg*/
+		
+	  ResultSet res = st.executeQuery("SELECT * From Item2 ORDER BY Time DESC LIMIT 1");
+        while (res.next()) {
+			float Value = res.getFloat("Value");
+			Float value=new Float(1.5f);
+		
+			if (Value!=value){
+				try {
+					RulePush.sendNote("Blood pressure"," abnormal blood pressure");
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}}
 		}
 
-		/* Rule for calculating the average of Blood Pressure for a period of time */
+		/* Rule for calculating the average of HeartPulse per minute in a period of 1 day*/
 
 		st2 = conn.createStatement();
 		ResultSet res2 = st2
-				.executeQuery("SELECT AVG(Value) AS value_Average FROM Item8 WHERE `Time` BETWEEN '2015-select th05-20' AND '2015-06-07'");
+				.executeQuery("SELECT AVG(Value) AS value_Average FROM Item1 WHERE `Time` BETWEEN '2015-08-20' AND '2015-08-20'");
 		while (res2.next()) {
 
 			int Value = res2.getInt("value_Average");
-
-			if (Value >20) {
+            
+			if ( Value<80 && Value >136) {
 				try {
-					RulePush.sendNote("Blood Pressure","The blood pressure increased");
+					RulePush.sendNote("Blood Pressure"," Abnormal Heart Pulse");
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
+            }
 			}
-
-		}
 		/* Turn ON/OFF light and/or the TV */
 		
 		st10 = conn.createStatement();
-		ResultSet res10 = st10
-				.executeQuery("SELECT * From Item21 ORDER BY Time DESC LIMIT 1");
+		ResultSet res10 = st10.executeQuery("SELECT * From Item3 ORDER BY Time DESC LIMIT 1");
 		while (res10.next()) {
 			Double Value = res10.getDouble("Value");
 			if (Value < 8.0) {
-				try {
+				try { 
 					state_LR.pushItemValue("LivingRoom_Light", "ON");
-					if (Value<5.0) {
+					
+					if (Value<5.0){
 						state_tv.pushItemValue("Tv_Switch", "ON");
 					} else {
-						state_tv.pushItemValue("Tv_Switch", "OFF");
-					}
+					 state_tv.pushItemValue("Tv_Switch", "OFF");
+						    }
 
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
-				}
-			}
+				}}
+			
                else {
-				
-            	   try {
+				try {
 					state_LR.pushItemValue("LivingRoom_Light", "OFF");
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
@@ -119,7 +165,7 @@ public class LogicRules {
 		/* Switch ON/OFF appliances in the kitchen */
 		st9 = conn.createStatement();
 		ResultSet res9 = st9
-				.executeQuery("SELECT * From Item20 ORDER BY Time DESC LIMIT 1");
+				.executeQuery("SELECT * From Item4 ORDER BY Time DESC LIMIT 1");
 		while (res9.next()) {
 			Double Value = res9.getDouble("Value");
 
@@ -164,12 +210,11 @@ public class LogicRules {
 
 		st7 = conn.createStatement();
 		ResultSet res7 = st7
-				.executeQuery("SELECT AVG(Value) AS value_Average FROM Item19 WHERE `Time` BETWEEN '2015-select th05-20' AND '2015-06-07'");
+				.executeQuery("SELECT AVG(Value) AS value_Average FROM Item22 WHERE `Time` BETWEEN '2015-08-19' AND '2015-08-19'");
 		while (res7.next()) {
 
-			int Value = res7.getInt("value_Average");
-
-			if (Value > 1000) {
+			  int Value = res7.getInt("value_Average");
+              if (Value >70) {
 				try {
 					RulePush.sendNote("Weight check",
 							"the weight average increased");
@@ -181,7 +226,7 @@ public class LogicRules {
 
 			}
 
-			else if (Value < 1) {
+			else if (Value < 0) {
 				try {
 					RulePush.sendNote("Weight check",
 							"the weight average decreased");
@@ -193,73 +238,60 @@ public class LogicRules {
 
 			}
 		}
-
-		/*
-		 * Switch the light ON in the morning after checking and LUX and the
-		 * occupancy.
-		 */
-
-		st3 = conn.createStatement();
-		ResultSet res3 = st3
-				.executeQuery("SELECT * From Item10 ORDER BY Time DESC LIMIT 1");
-		while (res3.next()) {
-			String Value = res3.getString("Value");
+		
+		/*Rule to switch ON the light*/
+		st11= conn.createStatement();
+		ResultSet res11 = st11
+				.executeQuery("SELECT * From Item21 ORDER BY Time DESC LIMIT 1");
+		while (res11.next()) {
+			String Value = res11.getString("Value");
+		 if (Value.equals("OPEN")) {
+			try {
+				state_presence.pushItemValue("Light_Switch","ON");
+				} catch (ClientProtocolException e)  {
+				e.printStackTrace();
+			}
+		}
+		 else {
+			 try {
+					
+	               state_presence.pushItemValue("Light_Switch",
+							"OFF");
+				} catch (ClientProtocolException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			 
+		 }
+	}
+		
+		/*Rule to not combine two dangerous actions*/
+		
+		st12 = conn.createStatement();
+		ResultSet res12 = st12
+				.executeQuery("SELECT * From Item15 ORDER BY Time DESC LIMIT 1");
+		while (res12.next()) {
+			
+			String Value = res12.getString("Value");
 			if (Value.equals("ON")) {
 				try {
-					st5 = conn.createStatement();
-					ResultSet res5 = st5
-							.executeQuery("SELECT * From Item2 ORDER BY Time DESC LIMIT 1");
-					while (res5.next()) {
-						int Value1 = res5.getInt("Value");
-
-						if (Value1 <= 100) {
-							state_morning.pushItemValue("Light_Switch", "ON");
-							 state_kettle.pushItemValue("Kettle_Switch", "ON");
+					st13 = conn.createStatement();
+					ResultSet res13 = st13
+							.executeQuery("SELECT * From Item16 ORDER BY Time DESC LIMIT 1");
+					while (res13.next()) {
+						String Value1 = res13.getString("Value");
+						if (Value1.equals("ON")) {
+							RulePush.sendNote("Warning",
+									"Please don't sleep and cook");
 							}
 					}
 				} catch (IOException e) {
 
 					e.printStackTrace();
 				}
+		
+	}}}}
 
-			} else if (Value.equals("OFF")) {
-
-				{
-					st6 = conn.createStatement();
-					ResultSet res6 = st6
-							.executeQuery("SELECT * From Item9 ORDER BY Time DESC LIMIT 1");
-					while (res6.next()) {
-						String Value1 = res6.getString("Value");
-
-						if (Value1.equals("CLOSED")) {
-							try {
-
-								 state_presence.pushItemValue("Light_Switch","OFF");
-								 state_kettle.pushItemValue("Kettle_Switch", "OFF");
-							} catch (ClientProtocolException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
-
-						else if (Value1.equals("OPEN")) {
-							try {
-                               state_presence.pushItemValue("Light_Switch",
-										"ON");
-							} catch (ClientProtocolException e) {
-								
-								e.printStackTrace();
-							} catch (IOException e) {
-								
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-
-			}
-
-		}
-  }
-}
