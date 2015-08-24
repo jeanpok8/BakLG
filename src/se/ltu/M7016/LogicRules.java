@@ -17,12 +17,12 @@ public class LogicRules {
 	protected void connect() throws SQLException, InterruptedException,
 			ClientProtocolException, IOException {
 
-		OpenhabClient state_tv = new OpenhabClient("localhost", 8080);
-		OpenhabClient state_cooker = new OpenhabClient("localhost", 8080);
-		OpenhabClient state_kettle = new OpenhabClient("localhost", 8080);
-		OpenhabClient state_morning = new OpenhabClient("localhost", 8080);
-		OpenhabClient state_presence = new OpenhabClient("localhost", 8080);
-		OpenhabClient state_Switch = new OpenhabClient("localhost", 8080);
+		OpenhabClient state_tv = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
+		OpenhabClient state_cooker = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
+		OpenhabClient state_kettle = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
+		OpenhabClient state_morning = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
+		OpenhabClient state_presence = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
+		OpenhabClient state_Switch = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
 		
 		OpenhabClient state_LK = new OpenhabClient("localhost", 8080);
 		OpenhabClient state_LR = new OpenhabClient("localhost", 8080);
