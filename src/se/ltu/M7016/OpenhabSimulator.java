@@ -4,11 +4,11 @@ import java.util.Random;
 
 import org.apache.http.client.ClientProtocolException;
 /*This class is used to generate data and serves as a client binding to OpenHAB*/
-public class OpenhabSimulator {
+public class OpenhabSimulator{
 
-	public static void main(String[] args) throws InterruptedException, ClientProtocolException, IOException {
+	public static void main(String[] args) throws InterruptedException, ClientProtocolException, IOException{
 		
-		while (true) {
+		while (true){
             OpenhabClient heartBrPush = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
 			OpenhabClient weightPush = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
 			OpenhabClient blPressurePush = new OpenhabClient("OpenHAB_Address", OpenHAB_Port);
