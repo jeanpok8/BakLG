@@ -10,10 +10,10 @@ import org.apache.http.client.ClientProtocolException;
 /**
  * This class represents Logic rules context reasoning decision model.
  * 
- * @author Bambanza.
+ * 
  *
  */
-public class LogicRules {
+public class LogicRuleApp{
 	protected void connect() throws SQLException, InterruptedException,
 			ClientProtocolException, IOException {
 
